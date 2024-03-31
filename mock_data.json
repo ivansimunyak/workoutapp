@@ -17,6 +17,84 @@
               "sets": 4,
               "reps": 15,
               "reps_on_last_set": 18
+            },
+            {
+              "name": "Deadlifts",
+              "sets": 3,
+              "reps": 8,
+              "reps_on_last_set": 10
+            },
+            {
+              "name": "Bench Press",
+              "sets": 4,
+              "reps": 12,
+              "reps_on_last_set": 15
+            },
+            {
+              "name": "Pull-ups",
+              "sets": 3,
+              "reps": 6,
+              "reps_on_last_set": 8
+            },
+            {
+              "name": "Planks",
+              "sets": 3,
+              "reps": 30,
+              "reps_on_last_set": 40
+            },
+            {
+              "name": "Lunges",
+              "sets": 3,
+              "reps": 12,
+              "reps_on_last_set": 15
+            },
+            {
+              "name": "Dips",
+              "sets": 4,
+              "reps": 10,
+              "reps_on_last_set": 12
+            },
+            {
+              "name": "Mountain Climbers",
+              "sets": 3,
+              "reps": 20,
+              "reps_on_last_set": 25
+            },
+            {
+              "name": "Russian Twists",
+              "sets": 3,
+              "reps": 20,
+              "reps_on_last_set": 25
+            },
+            {
+              "name": "Leg Raises",
+              "sets": 3,
+              "reps": 12,
+              "reps_on_last_set": 15
+            },
+            {
+              "name": "Bicep Curls",
+              "sets": 4,
+              "reps": 12,
+              "reps_on_last_set": 15
+            },
+            {
+              "name": "Shoulder Press",
+              "sets": 3,
+              "reps": 10,
+              "reps_on_last_set": 12
+            },
+            {
+              "name": "Tricep Dips",
+              "sets": 4,
+              "reps": 12,
+              "reps_on_last_set": 15
+            },
+            {
+              "name": "Box Jumps",
+              "sets": 3,
+              "reps": 8,
+              "reps_on_last_set": 10
             }
           ]
         },
@@ -96,7 +174,7 @@
               "reps": 8,
               "reps_on_last_set": 10
             }
-          ]
+                    ]
         }
       ]
     }
