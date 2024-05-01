@@ -1,182 +1,70 @@
-{
-  "training_plan": [
-    {
-      "week_number": 1,
-      "days": [
-        {
-          "day": 1,
-          "exercises": [
-            {
-              "name": "Squats",
-              "sets": 3,
-              "reps": 10,
-              "reps_on_last_set": 12
-            },
-            {
-              "name": "Push-ups",
-              "sets": 4,
-              "reps": 15,
-              "reps_on_last_set": 18
-            },
-            {
-              "name": "Deadlifts",
-              "sets": 3,
-              "reps": 8,
-              "reps_on_last_set": 10
-            },
-            {
-              "name": "Bench Press",
-              "sets": 4,
-              "reps": 12,
-              "reps_on_last_set": 15
-            },
-            {
-              "name": "Pull-ups",
-              "sets": 3,
-              "reps": 6,
-              "reps_on_last_set": 8
-            },
-            {
-              "name": "Planks",
-              "sets": 3,
-              "reps": 30,
-              "reps_on_last_set": 40
-            },
-            {
-              "name": "Lunges",
-              "sets": 3,
-              "reps": 12,
-              "reps_on_last_set": 15
-            },
-            {
-              "name": "Dips",
-              "sets": 4,
-              "reps": 10,
-              "reps_on_last_set": 12
-            },
-            {
-              "name": "Mountain Climbers",
-              "sets": 3,
-              "reps": 20,
-              "reps_on_last_set": 25
-            },
-            {
-              "name": "Russian Twists",
-              "sets": 3,
-              "reps": 20,
-              "reps_on_last_set": 25
-            },
-            {
-              "name": "Leg Raises",
-              "sets": 3,
-              "reps": 12,
-              "reps_on_last_set": 15
-            },
-            {
-              "name": "Bicep Curls",
-              "sets": 4,
-              "reps": 12,
-              "reps_on_last_set": 15
-            },
-            {
-              "name": "Shoulder Press",
-              "sets": 3,
-              "reps": 10,
-              "reps_on_last_set": 12
-            },
-            {
-              "name": "Tricep Dips",
-              "sets": 4,
-              "reps": 12,
-              "reps_on_last_set": 15
-            },
-            {
-              "name": "Box Jumps",
-              "sets": 3,
-              "reps": 8,
-              "reps_on_last_set": 10
-            }
-          ]
-        },
-        {
-          "day": 2,
-          "exercises": [
-            {
-              "name": "Deadlifts",
-              "sets": 3,
-              "reps": 8,
-              "reps_on_last_set": 10
-            },
-            {
-              "name": "Bench Press",
-              "sets": 4,
-              "reps": 12,
-              "reps_on_last_set": 15
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "week_number": 2,
-      "days": [
-        {
-          "day": 1,
-          "exercises": [
-            {
-              "name": "Pull-ups",
-              "sets": 3,
-              "reps": 6,
-              "reps_on_last_set": 8
-            },
-            {
-              "name": "Planks",
-              "sets": 3,
-              "reps": 30,
-              "reps_on_last_set": 40
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "week_number": 3,
-      "days": [
-        {
-          "day": 1,
-          "exercises": [
-            {
-              "name": "Lunges",
-              "sets": 3,
-              "reps": 12,
-              "reps_on_last_set": 15
-            },
-            {
-              "name": "Dips",
-              "sets": 4,
-              "reps": 10,
-              "reps_on_last_set": 12
-            }
-          ]
-        },
-        {
-          "day": 2,
-          "exercises": [
-            {
-              "name": "Leg Press",
-              "sets": 3,
-              "reps": 10,
-              "reps_on_last_set": 12
-            },
-            {
-              "name": "Shoulder Press",
-              "sets": 4,
-              "reps": 8,
-              "reps_on_last_set": 10
-            }
-                    ]
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "plan_name": "Stronger by Science",
+    "training_plan": [
+      {
+        "week_number": 1,
+        "days": [
+          {
+            "day": 1,
+            "exercises": [
+              { "name": "Pull-ups", "sets": 3, "reps": 6 },
+              { "name": "Planks", "sets": 3, "reps": 30 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "plan_name": "Power Building",
+    "training_plan": [
+      {
+        "week_number": 1,
+        "days": [
+          {
+            "day": 1,
+            "exercises": [
+              { "name": "Squats", "sets": 4, "reps": 5 },
+              { "name": "Bench Press", "sets": 4, "reps": 5 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "plan_name": "Body Sculpting",
+    "training_plan": [
+      {
+        "week_number": 1,
+        "days": [
+          {
+            "day": 1,
+            "exercises": [
+              { "name": "Lateral Raises", "sets": 3, "reps": 12 },
+              { "name": "Leg Curls", "sets": 3, "reps": 15 }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "plan_name": "Athletic Performance",
+    "training_plan": [
+      {
+        "week_number": 1,
+        "days": [
+          {
+            "day": 1,
+            "exercises": [
+              { "name": "Box Jumps", "sets": 3, "reps": 8 },
+              { "name": "Sprints", "sets": 3, "reps": 100, "unit": "meters" }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

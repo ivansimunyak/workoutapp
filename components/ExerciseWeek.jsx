@@ -1,15 +1,13 @@
 import React from "react";
 import ExerciseDay from "./ExerciseDay";
-import { Text, StyleSheet } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 
 const Tab = createMaterialTopTabNavigator();
-const exercisePlan = require('../mock_data.json').training_plan;
-console.log('This is planned' + exercisePlan.toString());
-const ExerciseWeek = () => {
+
+const ExerciseWeek = ({exercisePlan}) => {
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
+    <Tab.Navigator screenOptions={screenOptions} >
       {exercisePlan.map((week) => (
         <Tab.Screen
           key={`Week-${week.week_number}`}
@@ -29,7 +27,7 @@ const screenOptions = {
     height: 50,
   },
   tabBarIndicatorStyle: {
-    backgroundColor: '#344E41',
+    backgroundColor: '#3F72AF',
     height: 4,
   },
   tabBarLabelStyle: {

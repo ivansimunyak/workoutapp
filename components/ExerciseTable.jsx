@@ -15,24 +15,18 @@ const ExerciseTable = ({ route }) => {
           name={exercise.name}
           sets={exercise.sets}
           reps={exercise.reps}
-          reps_on_last_set={exercise.reps_on_last_set}
         />
       ))}
     </ScrollView>
   );
 }
 
-const Exercise = ({ name, sets, reps, reps_on_last_set }) => {
+const Exercise = ({ name, sets, reps }) => {
   return (
     <View style={styles.row}>
       <Text style={styles.cell}>{name}</Text>
       <Text style={styles.cell}>{sets}</Text>
       <Text style={styles.cell}>{reps}</Text>
-      <TextInput
-        style={styles.input}
-        keyboardType='numeric'
-        defaultValue={reps_on_last_set.toString()}
-      />
     </View>
   );
 };
@@ -43,7 +37,6 @@ const ExerciseHeader = () => {
       <Text style={styles.headerCell}>Name</Text>
       <Text style={styles.headerCell}>Sets</Text>
       <Text style={styles.headerCell}>Reps</Text>
-      <Text style={styles.headerCell}>Last set reps</Text>
     </View>
   );
 }
@@ -55,7 +48,7 @@ const styles = StyleSheet.create({
   },
   headerRow: {
     flexDirection: 'row', // Horizontally align the header cells
-    backgroundColor: '#588157',
+    backgroundColor: '#3F72AF',
     borderBottomWidth: 1,
     borderBottomColor: '#e0e0e0',
   },

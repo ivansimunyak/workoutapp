@@ -6,7 +6,7 @@ const Tab = createMaterialTopTabNavigator();
 
 function ExerciseDay({ route }) {
   const { exerciseDayList } = route.params;
-
+  
   return (
     <Tab.Navigator
       screenOptions={screenOptions}
