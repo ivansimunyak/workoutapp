@@ -7,7 +7,7 @@ const Tab = createMaterialTopTabNavigator();
 
 const ExerciseWeek = ({exercisePlan}) => {
   return (
-    <Tab.Navigator screenOptions={screenOptions} >
+    <Tab.Navigator screenOptions={screenOptions}>
       {exercisePlan.map((week) => (
         <Tab.Screen
           key={`Week-${week.week_number}`}
@@ -16,23 +16,23 @@ const ExerciseWeek = ({exercisePlan}) => {
           initialParams={{ exerciseDayList: week.days }}
         />
       ))}
-
     </Tab.Navigator>
   );
 }
 
 const screenOptions = {
   tabBarStyle: {
-    backgroundColor: '#DAD7CD',
+    backgroundColor: '#393E46',
     height: 50,
   },
   tabBarIndicatorStyle: {
-    backgroundColor: '#3F72AF',
-    height: 4,
+    backgroundColor: '#BBE1FA',
+    height: 2,
   },
   tabBarLabelStyle: {
     fontSize: 16,
     textTransform: 'none',
   },
+  tabBarActiveTintColor: '#BBE1FA'
 };
 export default ExerciseWeek;

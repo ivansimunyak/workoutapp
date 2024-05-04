@@ -1,5 +1,5 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import ExerciseTable from './ExerciseTable';
+import Exercise from './ExerciseTable';
 import React from 'react';
 
 const Tab = createMaterialTopTabNavigator();
@@ -15,7 +15,7 @@ function ExerciseDay({ route }) {
         <Tab.Screen
           key={`Day-${exerciseDay.day}`}
           name={`Day ${exerciseDay.day}`}
-          component={ExerciseTable}
+          component={Exercise}
           initialParams={{ exercises: exerciseDay.exercises }}
         />
       ))}
@@ -27,16 +27,17 @@ function ExerciseDay({ route }) {
 
 const screenOptions = {
   tabBarStyle: {
-    backgroundColor: '#DAD7CD',
+    backgroundColor: '#393E46',
     height: 50,
   },
   tabBarIndicatorStyle: {
-    backgroundColor: '#344E41',
-    height: 4,
+    backgroundColor: '#BBE1FA',
+    height: 2,
   },
   tabBarLabelStyle: {
     fontSize: 16,
     textTransform: 'none',
   },
+  tabBarActiveTintColor: '#BBE1FA'
 };
 export default ExerciseDay;

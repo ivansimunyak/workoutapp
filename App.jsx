@@ -1,112 +1,42 @@
 import * as React from 'react';
-
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ExercisePlan from './components/ExercisePlan';
-import { View, TouchableOpacity } from 'react-native';
-import {Dropdown} from 'react-native-element-dropdown';
-import Icon from 'react-native-vector-icons/Entypo';
+import AppHeader from './components/AppHeader';
+import TrainingPlanModal from './components/TrainingPlanModal';
+
 
 
 const exercisePlan = require('./mock_data.json');
+const modifiedArray = exercisePlan.map(({ plan_name }) => ({ plan_name }));
 const App = () => {
-
-
+  // Inside your parent component
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const [newTrainingPlan, setNewTrainingPlan] = React.useState(null);
+  
+  const handleSaveTrainingPlan = (plan) => {
+    // Handle the new training plan data (e.g., save it to state or send it to an API)
+    console.log('New training plan:', plan);
+    // You can also close the modal here if needed
+    setModalVisible(false);
+  };
+  
+  const handleHeaderButtonClick = () => {
+    // Your logic here (e.g., navigation, state update, etc.)
+      setModalVisible(true)
+  };
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <AppHeader/>
+      <AppHeader exercisePlan={modifiedArray} onHeaderButtonClick={handleHeaderButtonClick}/>
       <ExercisePlan exercises={exercisePlan[1]} />
+    <TrainingPlanModal
+      visible={modalVisible}
+      onClose={() => setModalVisible(false)}
+      onSave={handleSaveTrainingPlan}
+    />
     </GestureHandlerRootView>
   );
 };
 
-const AppHeader = () => {
-  const [value, setValue] = React.useState();
-  const [isFocus, setIsFocus] = React.useState(false);  
-  const handleIconPress = () => {
-    // Handle icon click here
-    console.log('Icon click!');
-  };
-  
-  return (
-    <View style={styles.rowContainer}>
-      <View style={styles.container}>
-        <Dropdown
-          style={[styles.dropdown]}
-          placeholderStyle={styles.placeholderStyle}
-          selectedTextStyle={styles.selectedTextStyle}
-          containerStyle={{backgroundColor:"#1B262C"}}
-          itemTextStyle={{color:'#BBE1FA'}}
-          activeColor='#0F4C75'
-          inputSearchStyle={styles.inputSearchStyle}
-          data={exercisePlan}
-          search
-          maxHeight={300}
-          labelField="plan_name"
-          valueField="plan_name"
-          placeholder={!isFocus ? 'Select item' : '...'}
-          searchPlaceholder="Search..."
-          value={value}
-          onFocus={() => setIsFocus(true)}
-          onBlur={() => setIsFocus(false)}
-          onChange={(item) => {
-            setValue(item);
-            setIsFocus(false);
-          }}
-        />
-      </View>
-      <TouchableOpacity onPress={handleIconPress}>
-        <Icon name="plus" style={styles.addIcon} />
-      </TouchableOpacity>
 
-      <TouchableOpacity onPress={handleIconPress}>
-        <Icon name="dots-three-vertical" style={styles.settings} />
-      </TouchableOpacity>
-    </View>
-  );
-};
-
-const styles = {
-  rowContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    backgroundColor: '#1B262C',
-    paddingHorizontal: 16,
-  },
-  container: {
-    width: '65%',
-    padding:10
-  },
-  dropdown: {
-    height: 50,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    color:'#BBE1FA'
-
-  },
-  placeholderStyle: {
-    fontSize: 16,
-    color:'#BBE1FA'
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-    color:'#BBE1FA'
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
-    color:'#BBE1FA'
-
-  },
-  settings: {
-    fontSize: 24,
-    color:'#BBE1FA',
-    paddingRight: 15,
-  },
-  addIcon:{
-    fontSize: 24,
-    color:'#BBE1FA',
-  },
-};
 
 export default App;

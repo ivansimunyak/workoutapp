@@ -3,85 +3,109 @@ import { View, Text, StyleSheet, TextInput } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
-const ExerciseTable = ({ route }) => {
+const Exercise = ({ route }) => {
   const { exercises } = route.params;
   return (
-    <ScrollView style={styles.table} stickyHeaderIndices={[0]}>
-      <ExerciseHeader />
+    <ScrollView style={styles.table}>
       {/* Table Rows */}
       {exercises.map((exercise) => (
-        <Exercise
+        <ExerciseCard
           key={exercise.name}
           name={exercise.name}
           sets={exercise.sets}
           reps={exercise.reps}
+          weight={exercise.weight}
         />
       ))}
     </ScrollView>
   );
 }
 
-const Exercise = ({ name, sets, reps }) => {
+const ExerciseCard = ({ name, sets, reps, weight }) => {
   return (
-    <View style={styles.row}>
-      <Text style={styles.cell}>{name}</Text>
-      <Text style={styles.cell}>{sets}</Text>
-      <Text style={styles.cell}>{reps}</Text>
+<View style={styles.card}>
+      {/* Exercise Name (Centered) */}
+      <View style={styles.centeredRow}>
+        <Text style={styles.name}>{name}</Text>
+      </View>
+
+   {/* Sets and Reps */}
+   <View style={styles.row}>
+        <View style={styles.inputContainer}>
+          <Text style={styles.key}>Sets: {sets}</Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.key}>Reps: {reps}</Text>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.key}>Weight: {weight}</Text>
+        </View>
+      </View>
+
+      {/* RIR (Rate of Perceived Exertion) and Reps on Last Set */}
+      <View style={styles.row}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter RIR"
+            keyboardType="numeric"
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Reps on last set"
+            keyboardType="numeric"
+          />
+        </View>
+      </View>
     </View>
   );
 };
 
-const ExerciseHeader = () => {
-  return (
-    <View style={styles.headerRow}>
-      <Text style={styles.headerCell}>Name</Text>
-      <Text style={styles.headerCell}>Sets</Text>
-      <Text style={styles.headerCell}>Reps</Text>
-    </View>
-  );
-}
 
 const styles = StyleSheet.create({
   table: {
     borderColor: '#e0e0e0',
-    backgroundColor: '#f9f9f9', // Light grey background for the table
+    backgroundColor: '#222831', // Light grey background for the table
   },
-  headerRow: {
-    flexDirection: 'row', // Horizontally align the header cells
-    backgroundColor: '#3F72AF',
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
+  card: {
+    backgroundColor: '#393E46',
+    padding: 12,
+    borderRadius: 8,
+    margin:15,
+    elevation:5
   },
-  headerCell: {
-    flex: 1,
-    padding: 10,
+  centeredRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 16,
+  },
+  name: {
+    color: '#BBE1FA',
     fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#333', // Darker text for better contrast
+    fontSize: 18,
   },
   row: {
     flexDirection: 'row',
-    borderBottomWidth: 1,
-    margin: 0,
-    borderBottomColor: '#e0e0e0',
-    backgroundColor: '#fff', // White background for rows to maintain readability
+    justifyContent: 'space-between',
+    marginBottom: 8,
   },
-  cell: {
+  key: {
+    color: '#BBE1FA',
+    fontWeight: 'bold',
+    fontSize: 14
+  },
+  inputContainer: {
     flex: 1,
-    padding: 10,
-    textAlign: 'center',
-    color: '#555', // Slightly lighter text for the cells
+    marginRight: 8,
   },
   input: {
     flex: 1,
-    padding: 10,
-    textAlign: 'center',
-    borderWidth: 1,
-    color: '#555',
-    borderColor: '#e0e0e0',
-    borderRadius: 5,
-    backgroundColor: '#effbff', // Very light blue for input fields
+    backgroundColor: '#BBE1FA',
+    borderRadius: 4,
+    paddingHorizontal: 8,
   },
 });
 
-export default ExerciseTable;
+export default Exercise;

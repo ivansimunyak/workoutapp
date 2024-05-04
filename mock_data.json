@@ -3,13 +3,13 @@
     "plan_name": "Stronger by Science",
     "training_plan": [
       {
-        "week_number": 1,
+        "week_number": 5,
         "days": [
           {
             "day": 1,
             "exercises": [
-              { "name": "Pull-ups", "sets": 3, "reps": 6 },
-              { "name": "Planks", "sets": 3, "reps": 30 }
+              { "name": "Pull-ups", "sets": 3, "reps": 6, "weight": 55 },
+              { "name": "Planks", "sets": 3, "reps": 30, "weight": 55 }
             ]
           }
         ]
@@ -25,8 +25,22 @@
           {
             "day": 1,
             "exercises": [
-              { "name": "Squats", "sets": 4, "reps": 5 },
-              { "name": "Bench Press", "sets": 4, "reps": 5 }
+              { "name": "Squats", "sets": 4, "reps": 5, "weight": 55 },
+              { "name": "Bench Press", "sets": 4, "reps": 5, "weight": 55 }
+            ]
+          },
+          {
+            "day": 2,
+            "exercises": [
+              { "name": "Squats", "sets": 4, "reps": 5, "weight": 55 },
+              { "name": "Bench Press", "sets": 4, "reps": 5, "weight": 55 }
+            ]
+          },
+          {
+            "day": 3,
+            "exercises": [
+              { "name": "Squats", "sets": 4, "reps": 5, "weight": 55 },
+              { "name": "Bench Press", "sets": 4, "reps": 5, "weight": 55 }
             ]
           }
         ]
@@ -42,8 +56,8 @@
           {
             "day": 1,
             "exercises": [
-              { "name": "Lateral Raises", "sets": 3, "reps": 12 },
-              { "name": "Leg Curls", "sets": 3, "reps": 15 }
+              { "name": "Lateral Raises", "sets": 3, "reps": 12, "weight": 55 },
+              { "name": "Leg Curls", "sets": 3, "reps": 15, "weight": 55 }
             ]
           }
         ]
@@ -60,7 +74,7 @@
             "day": 1,
             "exercises": [
               { "name": "Box Jumps", "sets": 3, "reps": 8 },
-              { "name": "Sprints", "sets": 3, "reps": 100, "unit": "meters" }
+              { "name": "Sprints", "sets": 3, "reps": 100, "unit": "meters", "weight": 55 }
             ]
           }
         ]
