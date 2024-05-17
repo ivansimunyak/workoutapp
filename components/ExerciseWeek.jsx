@@ -1,11 +1,13 @@
 import React from "react";
 import ExerciseDay from "./ExerciseDay";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { Text } from "react-native";
 
 
 const Tab = createMaterialTopTabNavigator();
 
 const ExerciseWeek = ({exercisePlan}) => {
+  console.log("In exercise week "+ exercisePlan.training_plan)
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       {exercisePlan.map((week) => (

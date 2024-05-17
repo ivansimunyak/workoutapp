@@ -4,12 +4,12 @@ import { View, TouchableOpacity } from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import Icon from 'react-native-vector-icons/Entypo';
 
-const AppHeader = ({exercisePlan, onHeaderButtonClick }) => {
+const AppHeader = ({exercisePlan, onAddButtonClick, onSelectedPlan }) => {
     const [value, setValue] = React.useState();
     const [isFocus, setIsFocus] = React.useState(false);  
     const handleIconPress = () => {
       // Handle icon click here
-      console.log('Icon click!');
+      console.log('Icon click!'+ value);
     };
     
     return (
@@ -36,10 +36,12 @@ const AppHeader = ({exercisePlan, onHeaderButtonClick }) => {
             onChange={(item) => {
               setValue(item);
               setIsFocus(false);
+              console.log("In app header and plan is "+item.plan_name)
+              onSelectedPlan(item.plan_name)
             }}
           />
         </View>
-        <TouchableOpacity onPress={onHeaderButtonClick}>
+        <TouchableOpacity onPress={onAddButtonClick}>
           <Icon name="plus" style={styles.addIcon} />
         </TouchableOpacity>
   

@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const Exercise = ({ route }) => {
   const { exercises } = route.params;
+  console.log(exercises)
   return (
     <ScrollView style={styles.table}>
       {/* Table Rows */}

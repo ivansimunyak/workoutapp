@@ -3,7 +3,19 @@
     "plan_name": "Stronger by Science",
     "training_plan": [
       {
-        "week_number": 5,
+        "week_number": 1,
+        "days": [
+          {
+            "day": 1,
+            "exercises": [
+              { "name": "Pull-ups", "sets": 3, "reps": 6, "weight": 55 },
+              { "name": "Planks", "sets": 3, "reps": 30, "weight": 55 }
+            ]
+          }
+        ]
+      },
+      {
+        "week_number": 2,
         "days": [
           {
             "day": 1,
@@ -20,7 +32,7 @@
     "plan_name": "Power Building",
     "training_plan": [
       {
-        "week_number": 1,
+        "week_number": 43,
         "days": [
           {
             "day": 1,
@@ -51,7 +63,7 @@
     "plan_name": "Body Sculpting",
     "training_plan": [
       {
-        "week_number": 1,
+        "week_number": 5,
         "days": [
           {
             "day": 1,
@@ -68,7 +80,7 @@
     "plan_name": "Athletic Performance",
     "training_plan": [
       {
-        "week_number": 1,
+        "week_number": 6,
         "days": [
           {
             "day": 1,

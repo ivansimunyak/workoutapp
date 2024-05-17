@@ -25,7 +25,7 @@ const TrainingPlanModal = ({ visible, onClose, onSave }) => {
       return;
     }
 
-    const days = instantiateDays();
+    const days = instantiateDays;
     const newTrainingPlan = {
       plan_name: planName,
       week_number: parseInt(weekNumber),
@@ -46,6 +46,7 @@ const TrainingPlanModal = ({ visible, onClose, onSave }) => {
     const clampedValue = Math.min(Math.max(inputValue, 1), 7);
 
     setDayNumber(inputValue ? clampedValue.toString() : '');
+    instantiateDays();
   }
 
   return (
