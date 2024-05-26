@@ -1,102 +1,73 @@
 import * as React from 'react';
-import { useEffect } from 'react';
-
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import ExercisePlan from './components/ExercisePlan';
 import AppHeader from './components/AppHeader';
 import TrainingPlanModal from './components/TrainingPlanModal';
-import { Text, View, TouchableOpacity  } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import * as SQLite from 'expo-sqlite';
-
-
+import { initializeDatabase } from './db/db.js';
 
 const exercisePlan = require('./mock_data.json');
-const modifiedArray = exercisePlan.map(({ plan_name }) => ({ plan_name }));
+const planNames = exercisePlan.map(({ plan_name }) => ({ plan_name }));
+
+// Call this function when your app starts up
+initializeDatabase();
+
 const App = () => {
   const db = SQLite.openDatabase('myAppDB');
 
-  // Inside your parent component
   const [modalVisible, setModalVisible] = React.useState(false);
-  const [newTrainingPlan, setNewTrainingPlan] = React.useState('Stronger By Science');
   const [activePlan, setActivePlan] = React.useState(null);
 
-  useEffect(() => {
-    try {
-    
-      // Insert two todo items
-      db.transaction((tx) => {
-        tx.executeSql(
-          'INSERT INTO todos (title) VALUES (?), (?)',
-          ['Buy groceries', 'Walk the dog'],
-          (_, result) => {
-            if (result.rowsAffected > 0) {
-              console.log('Todo items inserted successfully!');
-            } else {
-              console.error('Error inserting todo items.');
-            }
-          }
-        );
-      });
-    } catch (error) {
-      console.error('Error inserting todo items:', error);
-    }
-    
-    
-  }, []);
-
-  const handleSelectAll = () => {
-    db.transaction((tx) => {
-      tx.executeSql('SELECT * FROM todos', [], (_, result) => {
-        const rows = result.rows;
-        for (let i = 0; i < rows.length; i++) {
-          console.log(`Todo ${i + 1}:`, rows.item(i));
-        }
-      });
-    });
-  };
-
-
   const handleSaveTrainingPlan = (plan) => {
-    // Handle the new training plan data (e.g., save it to state or send it to an API)
-    console.log('New training plan:', plan);
-    // You can also close the modal here if needed
+    db.transaction((tx) => {
+      tx.executeSql(
+        'INSERT INTO plans (plan_name) VALUES (?)',
+        [plan.plan_name],
+        (_, result) => {
+          console.log('Data inserted into plans:', result);
+
+          const plan_id = result.insertId;
+
+          for (let i = 1; i <= plan.week_number; i++) {
+            tx.executeSql(
+              'INSERT INTO weeks (week_number, plan_id) VALUES (?, ?)',
+              [i, plan_id],
+              (_, result) => {
+                console.log('Data inserted into weeks:', result);
+              },
+              (_, error) => {
+                console.log('Error inserting data into weeks:', error);
+              }
+            );
+          }
+        },
+        (_, error) => {
+          console.log('Error inserting data into plans:', error);
+        }
+      );
+    });
     setModalVisible(false);
   };
-  
+
   const handleAddButtonClick = () => {
-    // Your logic here (e.g., navigation, state update, etc.)
-      setModalVisible(true)
+    setModalVisible(true);
   };
 
-  const handleSelectedPlan = (plan_name) => {
-    const foundExercise = exercisePlan.find(plan => plan.plan_name === plan_name);
-    setActivePlan(foundExercise)
-  };  
-
-  const memorizedHandleSelectedPlan = React.useCallback((plan_name) => {
-    const foundExercise = exercisePlan.find(plan => plan.plan_name === plan_name);
-    console.log("In App "+ foundExercise.plan_name)
+  const handleSelectedPlan = React.useCallback((plan_name) => {
+    const foundExercise = exercisePlan.find((plan) => plan.plan_name === plan_name);
     setActivePlan(foundExercise);
   }, [exercisePlan, setActivePlan]);
 
+  const renderPlan = !activePlan ? <Text>Plan not found! </Text> : <ExercisePlan exercises={activePlan} />;
 
-  const renderPlan = !activePlan ? <Text>Plan not found! </Text> : <ExercisePlan exercises={activePlan} />
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-            <TouchableOpacity onPress={handleSelectAll}>
-        <Text>Click me to select all todos</Text>
-      </TouchableOpacity>
-      <AppHeader exercisePlan={modifiedArray} onAddButtonClick={handleAddButtonClick} onSelectedPlan={memorizedHandleSelectedPlan}/>
-      <TrainingPlanModal
-      visible={modalVisible}
-      onClose={() => setModalVisible(false)}
-      onSave={handleSaveTrainingPlan}
-    />
-    {/* <ExercisePlan exercises={activePlan} /> */}
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <AppHeader exercisePlan={planNames} onAddButtonClick={handleAddButtonClick} onSelectedPlan={handleSelectedPlan} />
+      <TrainingPlanModal visible={modalVisible} onClose={() => setModalVisible(false)} onSave={handleSaveTrainingPlan} />
       {renderPlan}
     </GestureHandlerRootView>
   );
 };
-
 
 export default App;

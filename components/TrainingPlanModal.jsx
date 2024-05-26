@@ -5,49 +5,20 @@ import { View, Text, Modal, TouchableOpacity, TextInput, StyleSheet } from 'reac
 const TrainingPlanModal = ({ visible, onClose, onSave }) => {
   const [planName, setPlanName] = useState('');
   const [weekNumber, setWeekNumber] = useState('');
-  const [dayNumber, setDayNumber] = useState('1');
-  const [unit, setUnit] = useState('');
-
-  function instantiateDays() {
-    const days = [];
-    for (let i = 1; i <= parseInt(dayNumber, 10); i++) {
-      days.push({
-        day: i,
-        exercises: []
-      });
-    }
-    return days;
-  }
 
   const handleSave = () => {
-    if (!planName || !weekNumber || !dayNumber || !unit) {
+    if (!planName || !weekNumber) {
       alert('Please fill in all fields.');
       return;
     }
 
-    const days = instantiateDays;
     const newTrainingPlan = {
       plan_name: planName,
       week_number: parseInt(weekNumber),
-      unit,
-      days,
     };
-
+      
     onSave(newTrainingPlan);
   };
-
-  const handleAddDay = (text) => {
-    const cleanedText = text.replace(/[^0-9]/g, '');
-
-    // Convert the cleaned text to an integer
-    const inputValue = parseInt(cleanedText, 10);
-
-    // Ensure the value is within the desired range (1 to 7)
-    const clampedValue = Math.min(Math.max(inputValue, 1), 7);
-
-    setDayNumber(inputValue ? clampedValue.toString() : '');
-    instantiateDays();
-  }
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
@@ -66,22 +37,6 @@ const TrainingPlanModal = ({ visible, onClose, onSave }) => {
               onChangeText={setWeekNumber}
               value={weekNumber}
               keyboardType="numeric"
-              style={styles.input}
-            />
-            <TextInput
-              placeholder="Weight Unit"
-              onChangeText={setUnit}
-              value={unit}
-              style={styles.input}
-            />
-            <TextInput
-              placeholder="Days"
-              onChangeText={text => {
-                // Remove any non-numeric characters
-                handleAddDay(text)
-              }}
-              keyboardType="numeric"
-              value={dayNumber}
               style={styles.input}
             />
           </View>
