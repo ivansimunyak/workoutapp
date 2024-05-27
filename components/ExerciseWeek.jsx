@@ -2,8 +2,10 @@ import React from "react";
 import ExerciseDay from "./ExerciseDay";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { Text, View, StyleSheet } from "react-native";
+import { ActivityIndicator } from "react-native";
 
 import { MaterialIcons } from '@expo/vector-icons';
+import db from '../db/db';
 
 const Tab = createMaterialTopTabNavigator(); // Add this line
 
@@ -32,17 +34,45 @@ const CustomTabBar = ({ state, navigation }) => {
 };
 
 const ExerciseWeek = ({exercisePlan}) => {
+  console.log('ExerciseWeek', exercisePlan);
+  const [planWeeks, setPlanWeeks] = React.useState([]);
+
+
+  const fetchWeeks = () => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM weeks WHERE plan_id = ?',
+        [exercisePlan],
+        (_, { rows: { _array } }) => {
+          console.log('Data retrieved from weeks:', _array);
+          setPlanWeeks(_array);
+        },
+        (_, error) => {
+          console.error('Failed to fetch plan weeks:', error);
+        }
+      );
+    });
+  };
+
+  React.useEffect(() => {
+    fetchWeeks();
+  }, []);
+
   return (
-    <Tab.Navigator screenOptions={{...screenOptions}} tabBar={props => <CustomTabBar {...props} />}>
-      {exercisePlan.map((week) => (
-        <Tab.Screen
-          key={`Week-${week.week_number}`}
-          name={`Week ${week.week_number}`}
-          component={ExerciseDay}
-          initialParams={{ exerciseDayList: week.days }}
-        />
-      ))}
-    </Tab.Navigator>
+    planWeeks.length > 0 ? (
+      <Tab.Navigator screenOptions={{...screenOptions}} tabBar={props => <CustomTabBar {...props} />}>
+        {planWeeks.map((week) => (
+          <Tab.Screen
+            key={`Week-${week.week_id}`}
+            name={`Week ${week.week_number}`}
+            component={ExerciseDay}
+            initialParams={{ week_id: week.week_id }}
+          />
+        ))}
+      </Tab.Navigator>
+    ) : (
+      <ActivityIndicator size="large" color="#0000ff" /> // Replace with your own loading spinner
+    )
   );
 }
 

@@ -1,26 +1,30 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import Exercise from './ExerciseTable';
 import React from 'react';
+import { View, Text } from 'react-native';
 
 const Tab = createMaterialTopTabNavigator();
 
 function ExerciseDay({ route }) {
-  const { exerciseDayList } = route.params;
-  console.log("exercise day list "+ exerciseDayList)
+  const { week_id } = route.params;
+  console.log("exercise day list "+ week_id)
   return (
-    <Tab.Navigator
-      screenOptions={screenOptions}
-    >
-      {exerciseDayList.map((exerciseDay) => (
-        <Tab.Screen
-          key={`Day-${exerciseDay.day}`}
-          name={`Day ${exerciseDay.day}`}
-          component={Exercise}
-          initialParams={{ exercises: exerciseDay.exercises }}
-        />
-      ))}
+    // <Tab.Navigator
+    //   screenOptions={screenOptions}
+    // >
+    //   {exerciseDayList.map((exerciseDay) => (
+    //     <Tab.Screen
+    //       key={`Day-${exerciseDay.day}`}
+    //       name={`Day ${exerciseDay.day}`}
+    //       component={Exercise}
+    //       initialParams={{ exercises: exerciseDay.exercises }}
+    //     />
+    //   ))}
 
-    </Tab.Navigator>
+    // </Tab.Navigator>
+    <View>
+      <Text>Exercise Day</Text>
+    </View>
 
   );
 }

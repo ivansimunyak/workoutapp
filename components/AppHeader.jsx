@@ -3,14 +3,36 @@ import * as React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import {Dropdown} from 'react-native-element-dropdown';
 import Icon from 'react-native-vector-icons/Entypo';
+import db from '../db/db';
 
-const AppHeader = ({exercisePlan, onAddButtonClick, onSelectedPlan }) => {
+const AppHeader = ({onAddButtonClick, onSelectedPlan }) => {
     const [value, setValue] = React.useState();
-    const [isFocus, setIsFocus] = React.useState(false);  
+    const [isFocus, setIsFocus] = React.useState(false); 
+    const [planNames, setPlanNames] = React.useState([]);
+
     const handleIconPress = () => {
       // Handle icon click here
       console.log('Icon click!'+ value);
     };
+
+    const fetchPlanNames = () => {
+      db.transaction((tx) => {
+        tx.executeSql(
+          'SELECT * FROM plans',
+          [],
+          (_, { rows: { _array } }) => {
+            setPlanNames(_array);
+          },
+          (_, error) => {
+            console.error('Failed to fetch plan names:', error);
+          }
+        );
+      });
+    };
+
+    React.useEffect(() => {
+      fetchPlanNames();
+    }, []);
     
     return (
       <View style={styles.rowContainer}>
@@ -23,11 +45,11 @@ const AppHeader = ({exercisePlan, onAddButtonClick, onSelectedPlan }) => {
             itemTextStyle={{color:'#BBE1FA'}}
             activeColor='#0F4C75'
             inputSearchStyle={styles.inputSearchStyle}
-            data={exercisePlan}
+            data={planNames}
             search
             maxHeight={300}
             labelField="plan_name"
-            valueField="plan_name"
+            valueField="plan_id"
             placeholder={!isFocus ? 'Select item' : '...'}
             searchPlaceholder="Search..."
             value={value}
@@ -36,8 +58,8 @@ const AppHeader = ({exercisePlan, onAddButtonClick, onSelectedPlan }) => {
             onChange={(item) => {
               setValue(item);
               setIsFocus(false);
-              console.log("In app header and plan is "+item.plan_name)
-              onSelectedPlan(item.plan_name)
+              console.log("In app header and plan is "+item.plan_id+ "name "+item.plan_name)
+              onSelectedPlan(item.plan_id)
             }}
           />
         </View>

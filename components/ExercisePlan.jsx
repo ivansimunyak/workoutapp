@@ -3,10 +3,10 @@ import ExerciseWeek from './ExerciseWeek';
 import { View, Text } from 'react-native';
 
 
-const ExercisePlan = ({ exercises }) => {
+const ExercisePlan = ({ plan_id }) => {
   return (
     <NavigationContainer style={{ backgroundColor: 'blue' }}>
-      <ExerciseWeek exercisePlan={exercises.training_plan} />
+      <ExerciseWeek exercisePlan={plan_id} />
     </NavigationContainer>
   );
 }

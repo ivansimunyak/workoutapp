@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, Modal, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { View, Text, Modal,Button, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import db from '../db/db.js';
 
 
 const TrainingPlanModal = ({ visible, onClose, onSave }) => {
   const [planName, setPlanName] = useState('');
   const [weekNumber, setWeekNumber] = useState('');
+  const [planList, setPlanList] = React.useState([]);
 
   const handleSave = () => {
     if (!planName || !weekNumber) {
@@ -20,9 +22,33 @@ const TrainingPlanModal = ({ visible, onClose, onSave }) => {
     onSave(newTrainingPlan);
   };
 
+  const handleGenerateList = () => {
+    db.transaction((tx) => {
+      tx.executeSql(
+        'SELECT * FROM plans',
+        [],
+        (_, result) => {
+          console.log('Data retrieved from plans:', result.rows._array)
+          const plans = result.rows._array.map((row) => row.plan_name);
+          setPlanList(plans);
+        },
+        (_, error) => {
+          console.log('Error retrieving data from plans:', error);
+        }
+      );
+    });
+  };
+  const renderPlanList = planList.map((plan, index) => (
+    <Text key={index}>{plan}</Text>
+  ));
+
+
   return (
     <Modal visible={visible} animationType="slide" transparent>
       <View style={styles.modalContainer}>
+      <Button title="Generate List" onPress={handleGenerateList} />
+
+      {renderPlanList}
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Create New Training Plan</Text>
           <View>
