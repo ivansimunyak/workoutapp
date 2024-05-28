@@ -38,26 +38,22 @@ const ExerciseWeek = ({exercisePlan}) => {
   const [planWeeks, setPlanWeeks] = React.useState([]);
 
 
-  const fetchWeeks = () => {
-    db.transaction((tx) => {
-      tx.executeSql(
+  const fetchWeeks = async () => {
+    try {
+      const { rows: { _array } } = await db.allAsync(
         'SELECT * FROM weeks WHERE plan_id = ?',
-        [exercisePlan],
-        (_, { rows: { _array } }) => {
-          console.log('Data retrieved from weeks:', _array);
-          setPlanWeeks(_array);
-        },
-        (_, error) => {
-          console.error('Failed to fetch plan weeks:', error);
-        }
+        [exercisePlan]
       );
-    });
+      console.log('Data retrieved from weeks:', _array);
+      setPlanWeeks(_array);
+    } catch (error) {
+      console.error('Failed to fetch plan weeks:', error);
+    }
   };
-
+  
   React.useEffect(() => {
     fetchWeeks();
   }, []);
-
   return (
     planWeeks.length > 0 ? (
       <Tab.Navigator screenOptions={{...screenOptions}} tabBar={props => <CustomTabBar {...props} />}>

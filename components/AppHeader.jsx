@@ -15,19 +15,10 @@ const AppHeader = ({onAddButtonClick, onSelectedPlan }) => {
       console.log('Icon click!'+ value);
     };
 
-    const fetchPlanNames = () => {
-      db.transaction((tx) => {
-        tx.executeSql(
-          'SELECT * FROM plans',
-          [],
-          (_, { rows: { _array } }) => {
-            setPlanNames(_array);
-          },
-          (_, error) => {
-            console.error('Failed to fetch plan names:', error);
-          }
-        );
-      });
+    const fetchPlanNames = async () => {
+      await db.allAsync('SELECT * FROM plans').then(({rows: { _array }}) => {
+          setPlanNames(_array);
+        });
     };
 
     React.useEffect(() => {
